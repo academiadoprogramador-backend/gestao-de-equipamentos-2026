@@ -1,5 +1,10 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Dominio;
 
+int contadorIds = 1;
+
+// array = coleção unidimensional de objetos
+Equipamento[] equipamentosSalvos = new Equipamento[100];
+
 while (true)
 {
     // Console.Clear();
@@ -32,13 +37,26 @@ while (true)
         Console.Write("Digite o preço de aquisição do equipamento: ");
         decimal precoAquisicao = Convert.ToDecimal(Console.ReadLine());
 
-        Console.Write("Digte a data de fabricação do equipamento: ");
+        Console.Write("Digite a data de fabricação do equipamento: ");
         DateTime dataFabricacao = DateTime.Parse(Console.ReadLine());
 
         Equipamento equipamento = new Equipamento();
+        equipamento.id = contadorIds++;
         equipamento.nome = nome;
         equipamento.precoAquisicao = precoAquisicao;
         equipamento.dataFabricacao = dataFabricacao;
+
+        for (int i = 0; i < equipamentosSalvos.Length; i++)
+        {
+            if (equipamentosSalvos[i] == null)
+            {
+                equipamentosSalvos[i] = equipamento;
+                break;
+            }
+        }
+
+        Console.WriteLine($"O equipamento {equipamento.nome} foi cadastrado com sucesso!");
+        Console.ReadLine();
     }
     else if (opcaoMenu == "2")
     {
