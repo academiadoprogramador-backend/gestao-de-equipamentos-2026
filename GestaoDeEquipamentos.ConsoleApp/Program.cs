@@ -7,7 +7,7 @@ Equipamento[] equipamentosSalvos = new Equipamento[100];
 
 while (true)
 {
-    // Console.Clear();
+    Console.Clear();
     Console.WriteLine("---------------------------------");
     Console.WriteLine("Gestão de Equipamentos");
     Console.WriteLine("---------------------------------");
