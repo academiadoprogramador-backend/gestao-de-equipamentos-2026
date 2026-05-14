@@ -1,9 +1,10 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Dominio;
 
-int contadorIds = 1;
-
-// array = coleção unidimensional de objetos
+int contadorIdsEquipamentos = 1;
 Equipamento[] equipamentosSalvos = new Equipamento[100];
+
+int contadorIdsChamados = 1;
+Chamado[] chamadosSalvos = new Chamado[100];
 
 while (true)
 {
@@ -64,7 +65,7 @@ while (true)
                 DateTime dataFabricacao = DateTime.Parse(Console.ReadLine());
 
                 Equipamento equipamento = new Equipamento();
-                equipamento.id = contadorIds++;
+                equipamento.id = contadorIdsEquipamentos++;
                 equipamento.nome = nome;
                 equipamento.precoAquisicao = precoAquisicao;
                 equipamento.dataFabricacao = dataFabricacao;
@@ -212,6 +213,112 @@ while (true)
 
                 Console.WriteLine("---------------------------------");
                 Console.Write("Digite ENTER para continuar...");
+                Console.ReadLine();
+            }
+        }
+    }
+
+    else if (opcaoMenuPrincipal == "2")
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("Controle de Chamados");
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("1 - Cadastrar chamado");
+            Console.WriteLine("2 - Editar chamado");
+            Console.WriteLine("3 - Excluir chamado");
+            Console.WriteLine("4 - Visualizar chamados");
+            Console.WriteLine("S - Sair");
+            Console.WriteLine("---------------------------------");
+            Console.Write("> ");
+            string? opcaoMenu = Console.ReadLine()?.ToUpper();
+
+            if (opcaoMenu == "S")
+            {
+                Console.Clear();
+                break;
+            }
+
+            // Operações CRUD - Create, Retrieve, Update, Delete
+
+            if (opcaoMenu == "1")
+            {
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine("Cadastro de Chamado");
+                Console.WriteLine("---------------------------------");
+
+                // Obtenção dos Dados
+                Console.Write("Digite o título do chamado: ");
+                string titulo = Console.ReadLine();
+
+                Console.Write("Digite a descrição do chamado: ");
+                string descricao = Console.ReadLine();
+
+                DateTime dataAbertura = DateTime.Now;
+
+                // Apresentar os equipamentos cadastrados
+                Console.WriteLine("---------------------------------");
+
+                // tabela do console
+                Console.WriteLine(
+                    "{0, -7} | {1, -15} | {2, -20} | {3, -15}",
+                    "Id", "Nome", "Preço de Aquisição", "Data de Fabricação"
+                );
+
+                for (int i = 0; i < equipamentosSalvos.Length; i++)
+                {
+                    Equipamento eq = equipamentosSalvos[i];
+
+                    if (eq == null)
+                        continue;
+
+                    Console.WriteLine(
+                        "{0, -7} | {1, -15} | {2, -20} | {3, -15}",
+                        eq.id, eq.nome, eq.precoAquisicao, eq.dataFabricacao
+                    );
+                }
+
+                Console.WriteLine("---------------------------------");
+
+                // Pedir para o usuário selecionar o ID do equipamento desejado
+                Console.Write("Digite o id do equipamento que deseja selecionar: ");
+                int idEquipamentoSelecionado = Convert.ToInt32(Console.ReadLine());
+
+                Equipamento equipamentoSelecionado = null;
+
+                for (int i = 0; i < equipamentosSalvos.Length; i++)
+                {
+                    Equipamento eq = equipamentosSalvos[i];
+
+                    if (eq == null)
+                        continue;
+
+                    if (eq.id == idEquipamentoSelecionado)
+                    {
+                        equipamentoSelecionado = eq;
+                        break;
+                    }
+                }
+
+                Chamado novoChamado = new Chamado();
+                novoChamado.id = contadorIdsChamados++;
+                novoChamado.titulo = titulo;
+                novoChamado.descricao = descricao;
+                novoChamado.dataAbertura = dataAbertura;
+                novoChamado.equipamento = equipamentoSelecionado;
+
+                for (int i = 0; i < chamadosSalvos.Length; i++)
+                {
+                    if (chamadosSalvos[i] == null)
+                    {
+                        chamadosSalvos[i] = novoChamado;
+                        break;
+                    }
+                }
+
+                Console.WriteLine($"O chamado {novoChamado.titulo} foi cadastrado com sucesso!");
                 Console.ReadLine();
             }
         }
