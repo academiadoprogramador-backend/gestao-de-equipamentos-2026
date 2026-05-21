@@ -43,7 +43,7 @@ public class TelaEquipamento
 
         repositorioEquipamento.Cadastrar(equipamento);
 
-        Console.WriteLine($"O equipamento {equipamento.nome} foi cadastrado com sucesso!");
+        Console.WriteLine($"O equipamento {equipamento.Nome} foi cadastrado com sucesso!");
         Console.ReadLine();
     }
 
@@ -69,7 +69,7 @@ public class TelaEquipamento
 
             Console.WriteLine(
                 "{0, -7} | {1, -15} | {2, -20} | {3, -15}",
-                eq.id, eq.nome, eq.precoAquisicao, eq.dataFabricacao.ToShortDateString()
+                eq.Id, eq.Nome, eq.PrecoAquisicao, eq.DataFabricacao.ToShortDateString()
             );
         }
 
@@ -87,9 +87,6 @@ public class TelaEquipamento
         DateTime dataFabricacao = DateTime.Parse(Console.ReadLine());
 
         Equipamento equipamentoAtualizado = new Equipamento(nome, precoAquisicao, dataFabricacao);
-        equipamentoAtualizado.nome = nome;
-        equipamentoAtualizado.precoAquisicao = precoAquisicao;
-        equipamentoAtualizado.dataFabricacao = dataFabricacao;
 
         repositorioEquipamento.Editar(idSelecionado, equipamentoAtualizado);
 
@@ -119,7 +116,7 @@ public class TelaEquipamento
 
             Console.WriteLine(
                 "{0, -7} | {1, -15} | {2, -20} | {3, -15}",
-                eq.id, eq.nome, eq.precoAquisicao, eq.dataFabricacao.ToShortDateString()
+                eq.Id, eq.Nome, eq.PrecoAquisicao, eq.DataFabricacao.ToShortDateString()
             );
         }
 
@@ -156,7 +153,7 @@ public class TelaEquipamento
 
             Console.WriteLine(
                 "{0, -7} | {1, -15} | {2, -20} | {3, -15}",
-                eq.id, eq.nome, eq.precoAquisicao, eq.dataFabricacao.ToShortDateString()
+                eq.Id, eq.Nome, eq.PrecoAquisicao, eq.DataFabricacao.ToShortDateString()
             );
         }
 
